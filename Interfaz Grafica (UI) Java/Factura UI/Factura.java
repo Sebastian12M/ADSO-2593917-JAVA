@@ -1,8 +1,8 @@
 import javax.swing.*;
-import javax.swing.text.AbstractDocument.Content;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
+
 
 public class Factura extends JFrame {
 
@@ -257,7 +257,7 @@ public class Factura extends JFrame {
 
                 nombre_producto[0]="Agua";
                 nombre_producto[1]="Bombom";
-                nombre_producto[2]="Frutiño";
+                nombre_producto[2]="Frutino";
 
                 valor_producto[0]=2000;
                 valor_producto[1]=700;
@@ -274,7 +274,7 @@ public class Factura extends JFrame {
                 for(int i=0;i<nombre_producto.length;i++){
                     if(id_de_producto.equals(id_producto[i])){
                         int total_producto = valor_producto[i]*cantidad_producto;
-                        poner_text += id_de_producto +" - "+nombre_de_producto+" - "+cantidad_producto+" = $"+total_producto+"\n";
+                        poner_text += id_de_producto +" - "+nombre_producto[i]+" - "+cantidad_producto+" = $"+total_producto+"\n";
                         valor_pagar=valor_pagar+total_producto;
                     }
                 }
@@ -293,6 +293,31 @@ public class Factura extends JFrame {
         add(contenedor);
         revalidate();
         
+        id.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent e){
+                id_producto[0]="123";
+                id_producto[1]="1299";
+                id_producto[2]="2089";
+
+                nombre_producto[0]="Agua";
+                nombre_producto[1]="Bombon";
+                nombre_producto[2]="Frutiño";
+
+                valor_producto[0]=2000;
+                valor_producto[1]=700;
+                valor_producto[2]=1500;
+
+
+                String texto = id.getText();
+                System.out.println("Buscando: "+texto);
+
+                for(int i =0;i<id_producto.length;i++){
+                    if(texto.equals(id_producto[i])){
+                        nombre.setText(nombre_producto[i]);
+                    }
+                }
+            }
+        });
 
     }
 }
