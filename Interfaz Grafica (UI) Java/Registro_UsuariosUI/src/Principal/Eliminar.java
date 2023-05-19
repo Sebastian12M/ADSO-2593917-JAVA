@@ -7,6 +7,7 @@ public class Eliminar extends javax.swing.JFrame {
 
     Menu ventanaMenu4;
     int posicion;
+    Advertencia seguro = new Advertencia(this);
     public Eliminar(Menu venatanMenu) {
         this.ventanaMenu4=venatanMenu;
         this.posicion=0;
@@ -29,18 +30,23 @@ public class Eliminar extends javax.swing.JFrame {
                 for(int j=pos;j<this.ventanaMenu4.listaPersonas.length-1;j++){
                    
                    this.ventanaMenu4.listaPersonas[j]=this.ventanaMenu4.listaPersonas[j+1];   
+                   this.limpiar();
                 }
                         
             }
-        }  
+        } 
+        
     }
     
-   
+   public void limpiar(){
+       InputBuscarCedula.setText("");
+       MostrarPersona.setText("");
+   }
     
     public boolean buscar(){
-         String nombre = " ";
-         String telefono =" ";
-         String apellidos =" ";
+        String nombre = " ";
+        String telefono =" ";
+        String apellidos =" ";
         for(int i=0;i<this.ventanaMenu4.listaPersonas.length;i++){
             String buscar = InputBuscarCedula.getText();
             if(this.ventanaMenu4.listaPersonas[i]!=null && buscar.equals(this.ventanaMenu4.listaPersonas[i].getCedula()) ){
@@ -50,7 +56,7 @@ public class Eliminar extends javax.swing.JFrame {
                     telefono = this.ventanaMenu4.listaPersonas[i].getTelefono();
                     apellidos = this.ventanaMenu4.listaPersonas[i].getApellidos();
                     
-                   String mostrar= "    "+nombre+"    "+telefono+"    "+apellidos;
+                   String mostrar= "                       "+nombre+"    "+apellidos;
                     
                     MostrarPersona.setText(mostrar);
                    this.posicion=i;
@@ -79,10 +85,11 @@ public class Eliminar extends javax.swing.JFrame {
         BotonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 0));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Impact", 3, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Eliminar Usuario");
 
@@ -91,19 +98,20 @@ public class Eliminar extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel2)
+                .addGap(122, 122, 122)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(15, 15, 15))
+                .addGap(14, 14, 14))
         );
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,14 +125,16 @@ public class Eliminar extends javax.swing.JFrame {
             }
         });
 
+        MostrarPersona.setEditable(false);
         MostrarPersona.setColumns(20);
-        MostrarPersona.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        MostrarPersona.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         MostrarPersona.setRows(5);
+        MostrarPersona.setBorder(null);
+        MostrarPersona.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(MostrarPersona);
 
         Encontrado.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         Encontrado.setForeground(new java.awt.Color(255, 255, 255));
-        Encontrado.setText("Usuario no encontrado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -142,7 +152,7 @@ public class Eliminar extends javax.swing.JFrame {
                         .addComponent(InputBuscarCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(0, 51, Short.MAX_VALUE)))
+                        .addGap(0, 49, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(168, 168, 168)
@@ -160,11 +170,11 @@ public class Eliminar extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(Encontrado, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BotonCancelar.setBackground(new java.awt.Color(204, 204, 204));
+        BotonCancelar.setBackground(new java.awt.Color(153, 153, 153));
         BotonCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         BotonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         BotonCancelar.setText("Cancelar");
@@ -207,7 +217,7 @@ public class Eliminar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonEliminar)
                     .addComponent(BotonCancelar))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,9 +228,7 @@ public class Eliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        this.eliminar();
-        
-        
+        this.eliminar();  
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed

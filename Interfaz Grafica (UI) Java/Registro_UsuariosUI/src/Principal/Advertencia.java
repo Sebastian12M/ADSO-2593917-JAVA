@@ -4,12 +4,19 @@ package Principal;
 
 public class Advertencia extends javax.swing.JFrame {
 
- 
-    public Advertencia() {
+    Eliminar advertencia;
+    boolean seguro;
+    public Advertencia(Eliminar advertencias) {
+        this.advertencia=advertencias;
+        this.seguro=false;
         initComponents();
+        initComponents2();
     }
     
-    
+    public void initComponents2(){
+        setLocationRelativeTo(null);
+        
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -26,6 +33,11 @@ public class Advertencia extends javax.swing.JFrame {
 
         BotonCancelar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         BotonCancelar.setText("Cancelar");
+        BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelarActionPerformed(evt);
+            }
+        });
 
         BotonAceptar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         BotonAceptar.setText("Aceptar");
@@ -67,19 +79,23 @@ public class Advertencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAceptarActionPerformed
-        
+        seguro=true;
+        this.aceptar(seguro);
+        dispose();
     }//GEN-LAST:event_BotonAceptarActionPerformed
 
-   
-    public static void main(String args[]) {
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Advertencia().setVisible(true);
-            }
-        });
-    }
+    private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed
+        seguro = false;
+        this.aceptar(seguro);
+        dispose();
+    }//GEN-LAST:event_BotonCancelarActionPerformed
 
+   public boolean aceptar(boolean hola){
+       hola=seguro;
+       return hola;
+       
+   }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAceptar;
     private javax.swing.JButton BotonCancelar;

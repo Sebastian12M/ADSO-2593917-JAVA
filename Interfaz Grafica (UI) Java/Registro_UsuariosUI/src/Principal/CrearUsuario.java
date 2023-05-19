@@ -40,10 +40,13 @@ public class CrearUsuario extends javax.swing.JFrame {
         BotonRegistrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Malgun Gothic", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Impact", 3, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Crear Usuario");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -52,7 +55,7 @@ public class CrearUsuario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88))
         );
         jPanel1Layout.setVerticalGroup(
@@ -63,53 +66,70 @@ public class CrearUsuario extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        InputCedula.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
         InputCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputCedulaActionPerformed(evt);
             }
         });
 
-        LabelCedula.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelCedula.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        LabelCedula.setForeground(new java.awt.Color(255, 255, 255));
         LabelCedula.setText("Cedula:");
 
-        LabelNombres.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelNombres.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        LabelNombres.setForeground(new java.awt.Color(255, 255, 255));
         LabelNombres.setText("Nombre:");
 
+        InputNombre.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
         InputNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputNombreActionPerformed(evt);
             }
         });
 
-        LabelApellidos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelApellidos.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        LabelApellidos.setForeground(new java.awt.Color(255, 255, 255));
         LabelApellidos.setText("Apellidos:");
 
-        LabelTelefono.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelTelefono.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        LabelTelefono.setForeground(new java.awt.Color(255, 255, 255));
         LabelTelefono.setText("Telefono:");
 
+        InputApellidos.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
+
+        InputTelefono.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
         InputTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InputTelefonoActionPerformed(evt);
             }
         });
 
-        LabelDireccion.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelDireccion.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        LabelDireccion.setForeground(new java.awt.Color(255, 255, 255));
         LabelDireccion.setText("Direccion:");
+
+        InputDireccion.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
 
         BotonCancelar.setBackground(new java.awt.Color(255, 0, 0));
         BotonCancelar.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        BotonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         BotonCancelar.setText("Cancelar");
+        BotonCancelar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonCancelarActionPerformed(evt);
             }
         });
 
-        BotonRegistrar.setBackground(new java.awt.Color(0, 204, 51));
+        BotonRegistrar.setBackground(new java.awt.Color(51, 153, 0));
         BotonRegistrar.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
+        BotonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         BotonRegistrar.setText("Registrar");
+        BotonRegistrar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         BotonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonRegistrarActionPerformed(evt);
@@ -123,9 +143,9 @@ public class CrearUsuario extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BotonCancelar)
-                .addGap(47, 47, 47)
+                .addGap(33, 33, 33)
                 .addComponent(BotonRegistrar)
-                .addGap(58, 58, 58))
+                .addGap(89, 89, 89))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,14 +154,14 @@ public class CrearUsuario extends javax.swing.JFrame {
                     .addComponent(LabelTelefono)
                     .addComponent(LabelDireccion)
                     .addComponent(LabelNombres))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(InputNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InputCedula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InputApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InputTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InputDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                .addGap(29, 29, 29))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,11 +186,11 @@ public class CrearUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelDireccion)
                     .addComponent(InputDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonRegistrar)
-                    .addComponent(BotonCancelar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(BotonCancelar)
+                    .addComponent(BotonRegistrar))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
