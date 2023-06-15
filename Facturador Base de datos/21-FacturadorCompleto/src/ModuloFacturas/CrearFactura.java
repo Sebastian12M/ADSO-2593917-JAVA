@@ -324,7 +324,7 @@ public class CrearFactura extends JFrame{
         contPrincipal.add( btn_add_producto, restriccion );
 
         etq_resultado = new JTextArea();
-        
+        etq_resultado.setEditable(false);
         etq_resultado.setFont( new Font("Arial", Font.BOLD, 20) );
         etq_resultado.setOpaque(true);
         etq_resultado.setBackground( Color.white );
@@ -548,6 +548,14 @@ public class CrearFactura extends JFrame{
             this.ventanaMenu.database.insertarFactura(cedula_clien,cedula_ven,  fechaSql,total);
             this.ventanaMenu.database.insertarFacturaProducto(productos);
             System.out.print(  this.ventanaMenu.database.extraerId());
+            this.input_cant_producto.setText(" ");
+            this.input_cedula_cliente.setText(" ");
+            this.input_cedula_vendedor.setText(" ");
+            this.input_direccion_cliente.setText(" ");
+            this.input_id_producto.setText(" ");
+            this.input_nombre_producto.setText(" ");
+            this.input_nombres_vendedor.setText(" ");
+            this.etq_resultado.setText(" ");
              Alert alerta = new Alert("EXITO", "Factura Creada con exito.", "success");
             
             
