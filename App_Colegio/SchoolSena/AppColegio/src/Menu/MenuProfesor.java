@@ -6,8 +6,12 @@ import BD.DataBase;
 import BD.Profesor;
 import Login.Login;
 import ModuloAsis.Asistencias;
+import ModuloEstudiantes.EliminarEstudiante;
+import ModuloEstudiantes.ModificarEstudiante;
+import ModuloEstudiantes.MostrarEstudiantes;
 import ModuloEstudiantes.RegistrarEstudiante;
 import ModuloNotas.ListarEstudiantes;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +23,15 @@ public class MenuProfesor extends javax.swing.JFrame {
 
     private Profesor profe;
     DataBase database =new DataBase();
+    Color color;
+    int yMouse;
+    int xMouse;
     public MenuProfesor(Profesor profe) {
         this.profe=profe;
+        
         initComponents();
         init2();
+        color=this.jPanel2.getBackground();
     }
 
     
@@ -44,7 +53,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         BotonRegistrar = new javax.swing.JButton();
         BotonEliminar = new javax.swing.JButton();
         BotonMostrar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BotonModificar = new javax.swing.JButton();
         Asistencias = new javax.swing.JButton();
         BotonAsignarNotas = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -52,12 +61,23 @@ public class MenuProfesor extends javax.swing.JFrame {
         LabelMateriaPro = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BotonCerrar = new javax.swing.JButton();
+        ModoNoche = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel2MouseDragged(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel2MousePressed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -138,7 +158,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BotonRegistrar.setBackground(new java.awt.Color(0, 153, 153));
-        BotonRegistrar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        BotonRegistrar.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         BotonRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         BotonRegistrar.setText("Registrar estudiante\n");
         BotonRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -149,26 +169,41 @@ public class MenuProfesor extends javax.swing.JFrame {
         });
 
         BotonEliminar.setBackground(new java.awt.Color(0, 153, 153));
-        BotonEliminar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        BotonEliminar.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         BotonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         BotonEliminar.setText("Eliminar Estudiante");
         BotonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
 
         BotonMostrar.setBackground(new java.awt.Color(0, 153, 153));
-        BotonMostrar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        BotonMostrar.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         BotonMostrar.setForeground(new java.awt.Color(255, 255, 255));
         BotonMostrar.setText("Mostrar estudiantes");
         BotonMostrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonMostrarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Modificar estudiante");
-        jButton2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonModificar.setBackground(new java.awt.Color(0, 153, 153));
+        BotonModificar.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
+        BotonModificar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonModificar.setText("Modificar estudiante");
+        BotonModificar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        BotonModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonModificarActionPerformed(evt);
+            }
+        });
 
         Asistencias.setBackground(new java.awt.Color(0, 153, 153));
-        Asistencias.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        Asistencias.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         Asistencias.setForeground(new java.awt.Color(255, 255, 255));
         Asistencias.setText("Asistencias\n");
         Asistencias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -179,7 +214,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         });
 
         BotonAsignarNotas.setBackground(new java.awt.Color(0, 153, 153));
-        BotonAsignarNotas.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        BotonAsignarNotas.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         BotonAsignarNotas.setForeground(new java.awt.Color(255, 255, 255));
         BotonAsignarNotas.setText("Asignar notas");
         BotonAsignarNotas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -200,7 +235,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                     .addComponent(BotonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                     .addComponent(BotonMostrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BotonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BotonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BotonAsignarNotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Asistencias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
@@ -222,7 +257,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BotonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
 
@@ -245,15 +280,22 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 153));
-        jButton4.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("X");
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BotonCerrar.setBackground(new java.awt.Color(0, 153, 153));
+        BotonCerrar.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
+        BotonCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonCerrar.setText("X");
+        BotonCerrar.setBorder(null);
+        BotonCerrar.setBorderPainted(false);
+        BotonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BotonCerrarActionPerformed(evt);
+            }
+        });
+
+        ModoNoche.setText("Modo oscuro");
+        ModoNoche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModoNocheActionPerformed(evt);
             }
         });
 
@@ -282,21 +324,26 @@ public class MenuProfesor extends javax.swing.JFrame {
                                 .addComponent(LabelMateriaPro))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(ModoNoche)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jButton4)
+                .addComponent(BotonCerrar)
                 .addGap(2, 2, 2)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ModoNoche)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LabelProfesor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LabelNombrePro)
@@ -388,9 +435,10 @@ public class MenuProfesor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BotonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCerrarActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        revalidate();
+    }//GEN-LAST:event_BotonCerrarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
@@ -398,12 +446,62 @@ public class MenuProfesor extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void BotonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMostrarActionPerformed
+       MostrarEstudiantes ventana= new MostrarEstudiantes(this);
+       ventana.setVisible(true);
+    }//GEN-LAST:event_BotonMostrarActionPerformed
+
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        EliminarEstudiante ventana=new EliminarEstudiante(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_BotonEliminarActionPerformed
+
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+       ModificarEstudiante ventana=new ModificarEstudiante(this);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_BotonModificarActionPerformed
+
+    private void ModoNocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModoNocheActionPerformed
+        if(ModoNoche.isSelected()){
+           jPanel2.setBackground(Color.gray);
+           BotonAsignarNotas.setBackground(Color.black);
+           Asistencias.setBackground(Color.black);
+           BotonEliminar.setBackground(Color.black);
+           BotonMostrar.setBackground(Color.black);
+           BotonRegistrar.setBackground(Color.black);
+           BotonModificar.setBackground(Color.black);
+           BotonCerrar.setBackground(Color.black);
+       }else{
+           jPanel2.setBackground(color);
+           BotonAsignarNotas.setBackground(color);
+           Asistencias.setBackground(color);
+           BotonEliminar.setBackground(color);
+           BotonMostrar.setBackground(color);
+           BotonRegistrar.setBackground(color);
+           BotonModificar.setBackground(color);
+           BotonCerrar.setBackground(color);
+       }
+    }//GEN-LAST:event_ModoNocheActionPerformed
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        xMouse=evt.getX();
+        yMouse=evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        int y = evt.getYOnScreen();
+        int x = evt.getXOnScreen();
+        setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_jPanel2MouseDragged
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Asistencias;
     private javax.swing.JButton BotonAsignarNotas;
+    private javax.swing.JButton BotonCerrar;
     private javax.swing.JButton BotonEliminar;
+    private javax.swing.JButton BotonModificar;
     private javax.swing.JButton BotonMostrar;
     private javax.swing.JButton BotonRegistrar;
     private com.toedter.calendar.JDateChooser InputFecha;
@@ -411,11 +509,10 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel LabelMateriaPro;
     private javax.swing.JLabel LabelNombrePro;
     private javax.swing.JLabel LabelProfesor;
+    private javax.swing.JToggleButton ModoNoche;
     private javax.swing.JTable Tabla;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;

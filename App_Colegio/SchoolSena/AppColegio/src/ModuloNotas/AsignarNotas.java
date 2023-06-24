@@ -14,14 +14,16 @@ public class AsignarNotas extends javax.swing.JFrame {
    private Double informatica[];
    private String cedula;
    private Profesor profe;
+   private ListarEstudiantes listar;
     DataBase database = new DataBase();
-    public AsignarNotas(String estudiante, Double matematicas[], Double espaniol[], Double informatica[], String cedula, Profesor profe ) {
+    public AsignarNotas(String estudiante, Double matematicas[], Double espaniol[], Double informatica[], String cedula, Profesor profe, ListarEstudiantes listar ) {
         this.estudiante=estudiante;
         this.matematicas=matematicas;
         this.espaniol=espaniol;
         this.informatica=informatica;
         this.cedula=cedula;
         this.profe=profe;
+        this.listar=listar;
         initComponents();
         init2();
         asignarTodo();
@@ -210,7 +212,7 @@ public class AsignarNotas extends javax.swing.JFrame {
     private void BotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGuardarActionPerformed
         Double mat1 = Double.parseDouble(this.Mat1.getText());
         Double mat2 = Double.parseDouble(this.Mat2.getText()) ;
-        Double mat3 = Double.parseDouble(this.Mat2.getText()) ;
+        Double mat3 = Double.parseDouble(this.Mat3.getText()) ;
         
         Double espa1 = Double.parseDouble(this.Esp1.getText());
         Double espa2 = Double.parseDouble(this.Esp2.getText()) ;
@@ -223,6 +225,9 @@ public class AsignarNotas extends javax.swing.JFrame {
         database.AlmacenarMate(mat1, mat2, mat3, cedula);
         database.AlmacenarEspa(espa1, espa2, espa3, cedula);
         database.AlmacenarInfor(infor1, infor2, infor3, cedula);
+        dispose();
+        listar.setVisible(true);
+        
         
     }//GEN-LAST:event_BotonGuardarActionPerformed
     

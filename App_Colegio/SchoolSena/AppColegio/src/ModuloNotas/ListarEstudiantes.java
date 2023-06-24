@@ -14,7 +14,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 
 public class ListarEstudiantes extends javax.swing.JFrame {
@@ -22,7 +21,6 @@ public class ListarEstudiantes extends javax.swing.JFrame {
     DataBase database = new DataBase();
     private JButton [] etqButton;
     private JButton [] etqButton2;
-    Estudiantes [] estudiantes;
     private JLabel etqTemporal;
     private JLabel etqTemporal2;
     private Profesor profe;
@@ -30,56 +28,57 @@ public class ListarEstudiantes extends javax.swing.JFrame {
     public ListarEstudiantes(Profesor profe, MenuProfesor menu) {
         this.profe=profe;
         this.menu=menu;
-        this.estudiantes=database.mostrarEstudiantes();
-        this.etqButton=new JButton[estudiantes.length];
-        
         initComponents();
         init2();
     }
 
     public void init2(){
-         
         setLocationRelativeTo(null);
-        
         mostrarTodos();
-        
+        MostrarTodo.setLayout( new BoxLayout(MostrarTodo, BoxLayout.Y_AXIS) );
+        MostrarTodo.setBackground(Color.WHITE);
         
     }
     public void mostrarTodos(){
-        
-        DefaultTableModel modelo= new DefaultTableModel();
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Aignar Nota");
-        Mostrar.setModel(modelo);
-        
-        for(int i=0;i<estudiantes.length;i++){
-            if(estudiantes[i]!=null){
-                etqButton[i]= new JButton("Asignar Notas");
-
-                int posicion = i;
-                etqButton[i].addActionListener(new ActionListener() {
-                @Override
-                    public void actionPerformed(ActionEvent e) {
-                    Double matematicas[]=database.Matematicas(estudiantes[posicion].getCedula());
-                    Double espaniol[]=database.espaniol(estudiantes[posicion].getCedula());
-                    Double informatica[]=database.informatica(estudiantes[posicion].getCedula());
-
-                    AsignarNotas notas = new AsignarNotas(estudiantes[posicion].getNombre(), matematicas,espaniol,informatica, estudiantes[posicion].getCedula(),profe);
-                    dispose();
-                    notas.setVisible(true);
-                    System.out.print(estudiantes[posicion].getNombre());
-
-                    }
-                });
-
-                modelo.addRow(new Object[]{estudiantes[i].getCedula(), estudiantes[i].getNombre(), estudiantes[i].getApellido(), etqButton[i]});
-            }else{
-                break;
+        Estudiantes [] estudiantes=database.mostrarEstudiantes();
+          etqButton=new JButton[estudiantes.length];
+          etqButton2=new JButton[estudiantes.length];
+          
+            for(int i=0;i<estudiantes.length;i++){
+                if(estudiantes[i]!=null){
+                    etqTemporal = new JLabel("Cedula: "+estudiantes[i].getCedula()+"   "+"Nombre: "+estudiantes[i].getNombre()+"   "+"Apellido: "+estudiantes[i].getApellido());
+                    etqButton[i]= new JButton("Asignar Notas");
+                    etqTemporal2 = new JLabel("-----------------------------------------------------------------------------------------------------------------");
+                    etqTemporal.setFont(new Font("Source Han Sans Cn Bold", Font.PLAIN, 17));
+                    etqTemporal.setBorder(new EmptyBorder(2,10,2,10));
+                    MostrarTodo.add(etqTemporal);
+                    MostrarTodo.add(etqButton[i]);
+                    MostrarTodo.add(etqTemporal2);
+                    int posicion =i;
+                    
+                    
+                    
+                    etqButton[i].addActionListener(new ActionListener() {
+                    @Override
+                        public void actionPerformed(ActionEvent e) {
+                        Double matematicas[]=database.Matematicas(estudiantes[posicion].getCedula());
+                        Double espaniol[]=database.espaniol(estudiantes[posicion].getCedula());
+                        Double informatica[]=database.informatica(estudiantes[posicion].getCedula());
+                        
+                        
+                        
+                        AsignarNotas notas = new AsignarNotas(estudiantes[posicion].getNombre(), matematicas,espaniol,informatica, estudiantes[posicion].getCedula(),profe,ListarEstudiantes.this);
+                        dispose();
+                        notas.setVisible(true);
+                        System.out.print(estudiantes[posicion].getNombre());
+                    
+                        }
+                    });
+                
+                }else{
+                    break;
+                }
             }
-        }
-        
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -87,9 +86,9 @@ public class ListarEstudiantes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Mostrar = new javax.swing.JTable();
         BotonVolver = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        MostrarTodo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,25 +119,6 @@ public class ListarEstudiantes extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        Mostrar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        Mostrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cedula", "Nombre", "Apellido", "Asignar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(Mostrar);
-
         BotonVolver.setFont(new java.awt.Font("Source Han Sans CN Bold", 1, 14)); // NOI18N
         BotonVolver.setText("Volver");
         BotonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +127,21 @@ public class ListarEstudiantes extends javax.swing.JFrame {
             }
         });
 
+        MostrarTodo.setFont(new java.awt.Font("Source Han Sans CN Bold", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout MostrarTodoLayout = new javax.swing.GroupLayout(MostrarTodo);
+        MostrarTodo.setLayout(MostrarTodoLayout);
+        MostrarTodoLayout.setHorizontalGroup(
+            MostrarTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+        MostrarTodoLayout.setVerticalGroup(
+            MostrarTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 292, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(MostrarTodo);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -154,19 +149,19 @@ public class ListarEstudiantes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(195, 195, 195)
-                        .addComponent(BotonVolver)))
+                        .addComponent(BotonVolver))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(BotonVolver)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -199,7 +194,7 @@ public class ListarEstudiantes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonVolver;
-    private javax.swing.JTable Mostrar;
+    private javax.swing.JPanel MostrarTodo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

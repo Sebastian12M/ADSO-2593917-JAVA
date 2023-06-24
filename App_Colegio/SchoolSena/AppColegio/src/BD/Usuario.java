@@ -7,9 +7,9 @@ package BD;
 
 public class Usuario {
    private String usuario;
-   private int password;
+   private String password;
 
-    public Usuario(String usuario, int password) {
+    public Usuario(String usuario, String password) {
         this.usuario = usuario;
         this.password = password;
     }
@@ -22,11 +22,11 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
    

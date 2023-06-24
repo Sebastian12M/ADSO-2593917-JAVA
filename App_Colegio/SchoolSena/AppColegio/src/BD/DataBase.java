@@ -72,16 +72,16 @@ public class DataBase {
     }
 
     
-    public Usuario validacion(String usuario){
+    public Usuario validacion(String usuario, String contraseña){
         ResultSet registros=null;
         
         try {
-            String consulta = "SELECT * FROM profesores WHERE usuario='"+usuario+"'";
+            String consulta = "SELECT * FROM profesores WHERE usuario='"+usuario+"' AND contrasenia='"+contraseña+"'";
             registros=manipularDB.executeQuery(consulta);
             
             if(registros.next()){
                
-                Usuario validar = new Usuario(registros.getString("usuario"), registros.getInt("contrasenia"));
+                Usuario validar = new Usuario(registros.getString("usuario"), registros.getString("contrasenia"));
                 System.out.print(validar.getPassword()+ validar.getUsuario());
                return validar;
             }
@@ -140,6 +140,125 @@ public class DataBase {
 	}   
         return arregloestu;
     }
+    public Estudiantes buscarEstudiantes(String cedula){
+        Estudiantes temp = null;
+        try{
+            ResultSet registros = this.manipularDB.executeQuery("SELECT * FROM estudiantes WHERE cedula='"+cedula+"' ");
+            
+            registros.next();
+            if (registros.getRow()==1) {
+                temp = new Estudiantes( registros.getString("cedula"),registros.getString("nombre"), registros.getString("apellido"), registros.getInt("edad"), registros.getString("correo") );
+            }
+            return temp;
+        }catch(SQLException e){
+            System.out.println("Error en SELECT: "+e.getMessage());
+            return temp;
+        }
+    }
+    
+    public boolean modificarEstudiantes(Estudiantes persona){
+        boolean respuesta = false;
+        String cedula = persona.getCedula();
+        String nombres = persona.getNombre();
+        String apellidos = persona.getApellido();
+        String edad =String.valueOf(persona.getEdad()) ;
+        String correo = persona.getCorreo();
+      
+        
+        try {
+            String consulta = "UPDATE estudiantes SET nombre='"+nombres+"', apellido='"+apellidos+"', edad='"+edad+"', correo='"+correo+"' WHERE cedula='"+cedula+"'";
+            int resp = manipularDB.executeUpdate(consulta);
+            if (resp>0) {
+                respuesta = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en UPDATE: "+ex.getMessage());
+        }
+        return respuesta;
+    }
+    
+    public boolean eliminarEstudiante(String cedula){
+        try{
+            String cedulas=cedula;
+            String consulta = "DELETE FROM estudiantes WHERE cedula='"+cedulas+"' ";
+            String consulta2 = "DELETE FROM matematicas WHERE cedula='"+cedulas+"' ";
+            String consulta3 = "DELETE FROM espaniol WHERE cedula='"+cedulas+"' ";
+            String consulta4 = "DELETE FROM informatica WHERE cedula='"+cedulas+"' ";
+            
+            int resp_consulta = manipularDB.executeUpdate(consulta);
+            int resp_consulta2 = manipularDB.executeUpdate(consulta2);
+            int resp_consulta3 = manipularDB.executeUpdate(consulta3);
+            int resp_consulta4 = manipularDB.executeUpdate(consulta4);
+             if(resp_consulta==1 && resp_consulta==1){
+                return true;
+             }
+            
+        }catch(SQLException e){
+             System.out.println("--> Error Delete: " + e.getMessage());
+  
+        }  
+         if(true){
+            System.out.println("Eliminado con exito");
+            return true;
+         }else{
+            System.out.println("No se pudo Eliminar"); 
+            return false;
+         }
+    }
+    
+    public Mate[] mostrar_Matematicas( Estudiantes[] estu){
+        ResultSet registros = null;
+        
+        Mate mate []= new Mate[100];
+	try {
+            for (int i = 0; i < estu.length; i++) {
+            if (estu[i] != null) {
+                String cedula = estu[i].getCedula();
+
+                
+                String consultaMatematicas = "SELECT * FROM matematicas WHERE cedula='" + cedula + "'";
+                registros = manipularDB.executeQuery(consultaMatematicas);
+
+                if (registros.next()) {
+                    double promedioMatematicas = registros.getDouble("promedio");
+
+                    
+                    String consultaEspaniol = "SELECT * FROM espaniol WHERE cedula='" + cedula + "'";
+                    ResultSet registrosEspaniol = manipularDB.executeQuery(consultaEspaniol);
+
+                    if (registrosEspaniol.next()) {
+                        double promedioEspaniol = registrosEspaniol.getDouble("promedio");
+
+                        
+                        String consultaInformatica = "SELECT * FROM informatica WHERE cedula='" + cedula + "'";
+                        ResultSet registrosInformatica = manipularDB.executeQuery(consultaInformatica);
+
+                        if (registrosInformatica.next()) {
+                            double promedioInformatica = registrosInformatica.getDouble("promedio");
+
+                            Mate matematicas = new Mate(cedula, estu[i].getNombre(), promedioMatematicas,
+                                    promedioEspaniol, promedioInformatica);
+                            mate[i] = matematicas;
+                        }
+
+                        
+                    }
+
+                    
+                }
+            }
+        }
+
+        return mate;
+	} catch (SQLException ex) {
+	    System.out.println("Error al buscar el cliente: "+ex.getMessage());
+	}   
+        return mate;
+    }
+    
+  
+    
+    
     
     public Double[] Matematicas (String cedula){
         ResultSet registros = null;
@@ -212,10 +331,7 @@ public class DataBase {
                     arregloestu[2]=registros.getDouble("nota3");
                     arregloestu[3]=registros.getDouble("promedio"); 
                 }while(registros.next());
-               
-                    
-	        
-                
+ 
 	    }
             return arregloestu;
 	} catch (SQLException ex) {
@@ -432,16 +548,16 @@ public class DataBase {
     
     
     
-    public Usuario validacionEstu(String usuario){
+    public Usuario validacionEstu(String usuario, String contraseña){
         ResultSet registros=null;
         
         try {
-            String consulta = "SELECT * FROM estudiantes WHERE nombre='"+usuario+"'";
+            String consulta = "SELECT * FROM estudiantes WHERE nombre='"+usuario+"' AND cedula='"+contraseña+"'";
             registros=manipularDB.executeQuery(consulta);
             
             if(registros.next()){
                
-                Usuario validar = new Usuario(registros.getString("nombre"), registros.getInt("cedula"));
+                Usuario validar = new Usuario(registros.getString("nombre"), registros.getString("cedula"));
                 System.out.print(validar.getPassword()+ validar.getUsuario());
                return validar;
             }

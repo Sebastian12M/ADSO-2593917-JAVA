@@ -3,6 +3,7 @@ package ModuloEstudiantes;
 
 import BD.DataBase;
 import BD.Estudiantes;
+import javax.swing.JOptionPane;
 
 
 public class RegistrarEstudiante extends javax.swing.JFrame {
@@ -10,6 +11,7 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
     DataBase database = new DataBase();
     public RegistrarEstudiante() {
         initComponents();
+        initAlternComponents();
     }
 
    
@@ -52,6 +54,7 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel6.setText("Correo");
 
+        BotonRegistrar.setBackground(new java.awt.Color(0, 153, 153));
         BotonRegistrar.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         BotonRegistrar.setText("Registrar");
         BotonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +86,7 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +168,10 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void init2(){
+        setLocationRelativeTo(null);
+    }
+    
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarActionPerformed
         String cedula= this.InputCedula.getText();
         String nombre= this.InputNombre.getText();
@@ -174,7 +181,12 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
         
         Estudiantes estudiante = new Estudiantes(cedula, nombre, apellido, edad, correo);
         
-        database.registrarEstudiante(estudiante);
+        Boolean insertar = database.registrarEstudiante(estudiante);
+        if(insertar){
+            JOptionPane.showMessageDialog(this, "Registrado Correctamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Esta cedula ya se encuentra registrada");
+        }
         database.RegistrarMate(cedula);
         database.RegistrarEspa(cedula);
         database.RegistrarInfor(cedula);
@@ -218,6 +230,10 @@ public class RegistrarEstudiante extends javax.swing.JFrame {
                 new RegistrarEstudiante().setVisible(true);
             }
         });
+    }
+     public void initAlternComponents(){
+        setLocationRelativeTo(null);
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
