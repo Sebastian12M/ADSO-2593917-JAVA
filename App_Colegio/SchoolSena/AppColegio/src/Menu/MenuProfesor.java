@@ -66,6 +66,7 @@ public class MenuProfesor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -393,7 +394,7 @@ public class MenuProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_AsistenciasActionPerformed
 
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarActionPerformed
-        RegistrarEstudiante registro = new RegistrarEstudiante();
+        RegistrarEstudiante registro = new RegistrarEstudiante(this);
         registro.setVisible(true);
     }//GEN-LAST:event_BotonRegistrarActionPerformed
 
@@ -430,6 +431,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                 String todo="Nombre: "+nombre+"   "+"Apellido: "+apellido+"   "+"Fecha: "+asistencia+"   "+"Asistencia: "+fecha+"Materia: "+materia+"\n"+"\n";
                 
                 modelo.addRow(new Object[]{nombre, apellido, fecha, asistencia,materia});
+                
                 
             }
         }

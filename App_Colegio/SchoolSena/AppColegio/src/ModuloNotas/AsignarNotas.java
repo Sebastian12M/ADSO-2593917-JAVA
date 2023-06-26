@@ -4,6 +4,7 @@ package ModuloNotas;
 import BD.DataBase;
 import BD.Profesor;
 import Menu.MenuProfesor;
+import javax.swing.JOptionPane;
 
 
 public class AsignarNotas extends javax.swing.JFrame {
@@ -53,6 +54,7 @@ public class AsignarNotas extends javax.swing.JFrame {
         BotonGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -225,6 +227,7 @@ public class AsignarNotas extends javax.swing.JFrame {
         database.AlmacenarMate(mat1, mat2, mat3, cedula);
         database.AlmacenarEspa(espa1, espa2, espa3, cedula);
         database.AlmacenarInfor(infor1, infor2, infor3, cedula);
+        JOptionPane.showMessageDialog(this, "Notas guardadas");
         dispose();
         listar.setVisible(true);
         

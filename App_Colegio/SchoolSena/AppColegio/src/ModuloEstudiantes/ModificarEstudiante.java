@@ -5,6 +5,7 @@ import BD.DataBase;
 import BD.Estudiantes;
 import Menu.MenuProfesor;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -46,6 +47,7 @@ public class ModificarEstudiante extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentTitulo.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -356,6 +358,7 @@ public class ModificarEstudiante extends javax.swing.JFrame {
         
          if (!cedula.equals("") && !nombre.equals("") && !apellido.equals("") && !correo.equals("")  ) {
              database.modificarEstudiantes(temporal);
+             JOptionPane.showMessageDialog(this, "Modificado correctamente");
               dispose();
               volver.setVisible(true);
         }else{

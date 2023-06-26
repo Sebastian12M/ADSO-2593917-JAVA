@@ -5,6 +5,7 @@ import BD.DataBase;
 import BD.Estudiantes;
 import Menu.MenuProfesor;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -46,6 +47,7 @@ public class EliminarEstudiante extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         contentTitulo.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -351,6 +353,9 @@ public class EliminarEstudiante extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         String cedula=campoCedula.getText();
         database.eliminarEstudiante(cedula);
+        JOptionPane.showMessageDialog(this, "Eliminado correctamente");
+        dispose();
+        volver.setVisible(true);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void eventoKeyCampos(java.awt.event.KeyEvent evt) {                                 
