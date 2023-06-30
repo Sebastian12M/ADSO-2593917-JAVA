@@ -60,7 +60,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         LabelNombrePro = new javax.swing.JLabel();
         LabelMateriaPro = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton3 = new javax.swing.JButton();
+        botonCerrarSesion = new javax.swing.JButton();
         BotonCerrar = new javax.swing.JButton();
         ModoNoche = new javax.swing.JToggleButton();
 
@@ -270,14 +270,14 @@ public class MenuProfesor extends javax.swing.JFrame {
         LabelMateriaPro.setForeground(new java.awt.Color(255, 255, 255));
         LabelMateriaPro.setText("Matematicas");
 
-        jButton3.setBackground(new java.awt.Color(255, 0, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Cerrar Sesion");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonCerrarSesion.setBackground(new java.awt.Color(255, 0, 0));
+        botonCerrarSesion.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        botonCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        botonCerrarSesion.setText("Cerrar Sesion");
+        botonCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -325,7 +325,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                                 .addComponent(LabelMateriaPro))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
-                        .addComponent(jButton3))
+                        .addComponent(botonCerrarSesion))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(ModoNoche)))
@@ -355,7 +355,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LabelMateriaPro)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton3)
+                        .addComponent(botonCerrarSesion)
                         .addGap(10, 10, 10))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -400,7 +400,7 @@ public class MenuProfesor extends javax.swing.JFrame {
 
     private void BotonAsignarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAsignarNotasActionPerformed
         ListarEstudiantes notas = new ListarEstudiantes(profe,this);
-        setVisible(false);
+        dispose();
         notas.setVisible(true);
     }//GEN-LAST:event_BotonAsignarNotasActionPerformed
 
@@ -442,11 +442,11 @@ public class MenuProfesor extends javax.swing.JFrame {
         revalidate();
     }//GEN-LAST:event_BotonCerrarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
         dispose();
         Login login =new  Login();
         login.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
     private void BotonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMostrarActionPerformed
        MostrarEstudiantes ventana= new MostrarEstudiantes(this);
@@ -473,6 +473,7 @@ public class MenuProfesor extends javax.swing.JFrame {
            BotonRegistrar.setBackground(Color.black);
            BotonModificar.setBackground(Color.black);
            BotonCerrar.setBackground(Color.black);
+           jPanel4.setBackground(Color.gray);
        }else{
            jPanel2.setBackground(color);
            BotonAsignarNotas.setBackground(color);
@@ -482,6 +483,7 @@ public class MenuProfesor extends javax.swing.JFrame {
            BotonRegistrar.setBackground(color);
            BotonModificar.setBackground(color);
            BotonCerrar.setBackground(color);
+           jPanel4.setBackground(Color.WHITE);
        }
     }//GEN-LAST:event_ModoNocheActionPerformed
 
@@ -513,8 +515,8 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel LabelProfesor;
     private javax.swing.JToggleButton ModoNoche;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton botonCerrarSesion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
