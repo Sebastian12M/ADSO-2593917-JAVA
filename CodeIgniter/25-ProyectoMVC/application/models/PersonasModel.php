@@ -25,10 +25,24 @@ class PersonasModel extends CI_Model {
         return $this->db->insert_id();
 
     }
+
+	function findAll(){
+        $this->db->select();
+        $this->db->from($this->table);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 	
 	function insertUser($usuarios){
 		$this->db->insert($this->table_user, $usuarios);
         return $this->db->insert_id();
+	}
+
+	function eliminar($cedula){
+		$this->db->where('cedula',$cedula);
+		$this->db->delete($this->table);
+		return true;
 	}
 
 }

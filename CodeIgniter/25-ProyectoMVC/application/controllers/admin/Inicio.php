@@ -27,6 +27,13 @@ class Inicio extends CI_Controller {
 		$this->load->view('admin/inicio', $data);
 	}
 
+	public function listado()
+	{
+		$vdata["personas"] = $this->PersonasModel->findAll();
+
+		$this->load->view('verUsarios', $vdata);
+	}
+
 	public function openCreateUser(){
 		
 		$data['session'] = $this->session->userdata("session-mvc");
@@ -59,11 +66,25 @@ class Inicio extends CI_Controller {
     
 	}
 
+	
+
 	public function listUsers(){
+		
 		$data['session'] = $this->session->userdata("session-mvc");
+		$data["personas"] = $this->PersonasModel->findAll();
+
+		
 		$this->load->view('admin/verUsuarios', $data);
 	}
 
+	function delete ($cedula){
+		$resultado['valor']=$this->PersonasModel->eliminar($cedula);
+		if($resultado['valor']){
+		
+			redirect('admin/inicio','refresh');
+		}
+		
+	}
 }
 
 /* End of file Inicio.php */
