@@ -151,9 +151,12 @@ public class MainActivity extends AppCompatActivity {
                     sgt = response.getString("next");
                     atras=response.getString("previous");
                     for (int i=0;i<arreglo.length();i++){
+
                         JSONObject temporal = arreglo.getJSONObject(i);
                         String nombre = temporal.getString("name");
                         String url = temporal.getString("url");
+
+
 
 
                         pokemones.add(new Pokomones(nombre, url));

@@ -1,6 +1,7 @@
 package com.example.pokeapiandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,14 +61,24 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
         public void cargarDatos(Pokomones datos, int num){
             num_pokemon.setText(String.valueOf(num));
             nombre_poke.setText(datos.getNombre());
-
+            String url= datos.getUrl();
 
             btn_detalle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(contexto, datos.getNombre(), Toast.LENGTH_LONG).show();
+                    Intent intencion = new Intent(contexto, DetallesPokemon.class);
+                    intencion.putExtra("url",url);
+                    intencion.putExtra("nombre", datos.getNombre());
+                    contexto.startActivity(intencion);
+
                 }
             });
         }
+
+
+
+
+
+
     }
 }
