@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recycler;
     List <Pokomones> pokemones;
 
+    Button boton_atras;
     String sgt;
     String atras;
     @Override
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recycler=findViewById(R.id.recycler_pokemons);
-
+        boton_atras=findViewById(R.id.btn_atras);
         Pokemones();
 
 
@@ -53,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray arreglo = response.getJSONArray("results");
                     sgt = response.getString("next");
                     atras=response.getString("previous");
+
+                    if(atras!=null){
+
+                    }
+
+
                     System.out.println(sgt+"dsadas");
                     pokemones = new ArrayList<>();
                     for (int i=0;i<arreglo.length();i++){
@@ -103,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                     pokemones = new ArrayList<>();
                     sgt = response.getString("next");
                     atras=response.getString("previous");
+
+
                     for (int i=0;i<arreglo.length();i++){
                         JSONObject temporal = arreglo.getJSONObject(i);
                         String nombre = temporal.getString("name");

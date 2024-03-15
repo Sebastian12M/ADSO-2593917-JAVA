@@ -7,6 +7,8 @@
     tools:context=".DetallesPokemon"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -44,24 +46,59 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/altura"
-            android:layout_marginRight="40dp"
-            android:text="Altura:30"
+            android:textStyle="bold"
+           android:text="Altura:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/altura"
+            android:layout_marginRight="40dp"
+            android:text="30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+        <TextView
+            android:textStyle="bold"
+            android:text="Peso:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
             android:id="@+id/peso"
-            android:text="Peso: 40"
+            android:layout_marginRight="40dp"
+            android:text="70"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_habilidades"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="200dp">
+
+        <TextView
+            android:textSize="20dp"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HABILIDADES"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_habilidades"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+    </LinearLayout>
+
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

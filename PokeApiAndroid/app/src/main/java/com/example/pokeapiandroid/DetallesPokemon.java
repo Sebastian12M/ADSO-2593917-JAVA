@@ -24,13 +24,22 @@ import java.util.List;
 
 public class DetallesPokemon extends AppCompatActivity {
     RecyclerView recycler;
+
+    RecyclerView recycler_habi;
     TextView nombre_pokemon;
+    TextView alturas;
+    TextView pesos;
+
+    List <String> listaHabilidades;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles_pokemon);
         recycler=findViewById(R.id.recycler_imagenes);
+        recycler_habi=findViewById(R.id.recycler_habilidades);
         nombre_pokemon=findViewById(R.id.nombre_poke);
+        pesos=findViewById(R.id.peso);
+        alturas=findViewById(R.id.altura);
         CargarDetalles();
     }
 
@@ -50,20 +59,44 @@ public class DetallesPokemon extends AppCompatActivity {
                     System.out.println("El servidor responde OK");
                     System.out.println(response.toString());
 
+
+
+
+
+
                     JSONObject sprites = response.getJSONObject("sprites");
+
 
                     String back_default = sprites.getString("back_default");
                     String back_shiny = sprites.getString("back_shiny");
                     String front = sprites.getString("front_default");
                     String front_shiny= sprites.getString("front_shiny");
-
+                    String peso = String.valueOf(response.getInt("weight"));
+                    String altura = String.valueOf(response.getInt("height"));
                     List<String> imagenes = new ArrayList<>();
-
+                    System.out.println(peso+"dsaaaaaaaaaaaa");
 
                     imagenes.add(back_default);
                     imagenes.add(back_shiny);
                     imagenes.add(front);
                     imagenes.add(front_shiny);
+
+
+                    JSONArray arreglo = response.getJSONArray("abilities");
+                    listaHabilidades = new ArrayList<>();
+                    System.out.println(arreglo);
+
+                    for (int i = 0;i<arreglo.length();i++){
+                        JSONObject temporal = arreglo.getJSONObject(i);
+                        String habilidad = temporal.getJSONObject("ability").getString("name");
+
+
+
+
+                        listaHabilidades.add(habilidad);
+
+                    }
+
 
 
 
@@ -72,9 +105,20 @@ public class DetallesPokemon extends AppCompatActivity {
 
                     AdaptadorImagenes adaptador = new AdaptadorImagenes(imagenes);
 
+
                     recycler.setAdapter(adaptador);
                     recycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+                    AdaptadorHabilidades adaptador_habilidades =new AdaptadorHabilidades(listaHabilidades);
+                    recycler_habi.setAdapter(adaptador_habilidades);
+                    recycler_habi.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+
                     nombre_pokemon.setText(nombre);
+                    pesos.setText(peso);
+                    alturas.setText(altura);
+
+
                 }catch (JSONException e){
                     System.out.println(e);
                 }
